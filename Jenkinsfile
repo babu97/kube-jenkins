@@ -13,7 +13,6 @@ pipeline{
             }
         }
 
-    stages{
         stage("Check out SCM"){
             steps{
                 git branch: 'main', credentialsId: 'github', url: "https://github.com/babu97/kube-jenkins.git"
@@ -21,5 +20,4 @@ pipeline{
         }
 
     }
-}
 }
