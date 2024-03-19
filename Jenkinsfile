@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     // Start SonarQube environment
-                    withSonarQubeEnv(installationName: 'sonarqube-scanner-latest', credentialsId: 'jenkins-sonar-token') {
+                    withSonarQubeEnv(installationName: 'sonarqube-scanner-latest', credentialsId: 'sonarqube') {
                         // Perform actions within the SonarQube environment
                         // For example, execute SonarQube scanner
                         sh 'mvn sonar:sonar'
