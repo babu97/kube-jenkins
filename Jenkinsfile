@@ -15,9 +15,10 @@ pipeline {
     }
     stages {
         stage("Clean Workspace") {
-            steps {
-                cleanWs()
-            }
+        steps {
+        dir("${WORKSPACE}") {
+            deleteDir()
+        }
         }
 
         stage("Check out SCM") {
