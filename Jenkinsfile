@@ -44,6 +44,7 @@ pipeline {
                 withSonarQubeEnv(credentialsId:'jenkins-sonar-token')
                 sh "mvn sonar:sonar"
             }
+        }
 
     
         stage("Build & Push Docker Image") {
