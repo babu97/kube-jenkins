@@ -20,6 +20,7 @@ pipeline {
             deleteDir()
         }
         }
+        }
 
         stage("Check out SCM") {
             steps {
