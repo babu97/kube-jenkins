@@ -24,6 +24,7 @@ pipeline {
               privileged: true
        '''
     }
+    }
     tools {
         jdk 'java17'
         maven 'maven3'
