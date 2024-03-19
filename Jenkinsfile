@@ -21,7 +21,6 @@ pipeline {
         }
         }
         }
-
         stage("Check out SCM") {
             steps {
                 git branch: 'main', credentialsId: 'github', url: "https://github.com/babu97/kube-jenkins.git"
@@ -41,8 +40,10 @@ pipeline {
         
         stage("Sonarqube Analysis") {
             steps {
-               withSonarQubeEnv(installationName: 'sonarqube-scanner-latest', credentialsId: 'jenkins-sonar-token')
+               script{
+                withSonarQubeEnv(installationName: 'sonarqube-scanner-latest', credentialsId: 'jenkins-sonar-token')
                   sh "mvn sonar:sonar"
+               }   
             }
         }
 
