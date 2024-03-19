@@ -50,6 +50,17 @@ pipeline {
                 }
             }
         }
+        stage("Quality Gate") {
+            steps {
+                script {
+                    // Start SonarQube environment
+                     waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonar-token'
+                        // Perform actions within the SonarQube environment
+                        // For example, execute SonarQube scanne
+                    }
+                }
+            }
+        
     
         stage("Build & Push Docker Image") {
             steps {
