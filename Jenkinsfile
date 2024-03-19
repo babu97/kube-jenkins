@@ -38,15 +38,18 @@ pipeline {
             }
         }
         
-        stage("Sonarqube Analysis") {
+        stage("SonarQube Analysis") {
             steps {
-               script{
-                withSonarQubeEnv(installationName: 'sonarqube-scanner-latest', credentialsId: 'jenkins-sonar-token')
-                  sh "mvn sonar:sonar"
-               }   
+                script {
+                    // Start SonarQube environment
+                    withSonarQubeEnv(installationName: 'sonarqube-scanner-latest', credentialsId: 'jenkins-sonar-token') {
+                        // Perform actions within the SonarQube environment
+                        // For example, execute SonarQube scanner
+                        sh 'mvn sonar:sonar'
+                    }
+                }
             }
         }
-
     
         stage("Build & Push Docker Image") {
             steps {
