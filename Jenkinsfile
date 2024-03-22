@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'my-cloud-label'
+        label 'aws-spot'
     }
     tools {
         jdk 'java17'
