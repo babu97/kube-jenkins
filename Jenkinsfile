@@ -1,8 +1,6 @@
 pipeline {
     agent {
-     label 'my-cloud-label'
-
-    }
+        label 'my-cloud-label'
     }
     tools {
         jdk 'java17'
@@ -18,11 +16,11 @@ pipeline {
     }
     stages {
         stage("Clean Workspace") {
-        steps {
-        dir("${WORKSPACE}") {
-            deleteDir()
-        }
-        }
+            steps {
+                dir("${WORKSPACE}") {
+                    deleteDir()
+                }
+            }
         }
         stage("Check out SCM") {
             steps {
@@ -34,13 +32,11 @@ pipeline {
                 sh "mvn clean package"
             }
         }
-
         stage("Test Application") {
             steps {
                 sh "mvn test"
             }
         }
-        
         stage("SonarQube Analysis") {
             steps {
                 script {
@@ -57,26 +53,25 @@ pipeline {
             steps {
                 script {
                     // Start SonarQube environment
-                     waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonar-token'
-                        // Perform actions within the SonarQube environment
-                        // For example, execute SonarQube scanne
-                    }
+                    waitForQualityGate abortPipeline: false, credentialsId: 'jenkins-sonar-token'
+                    // Perform actions within the SonarQube environment
+                    // For example, execute SonarQube scanner
                 }
             }
-        
-    
+        }
         stage("Build & Push Docker Image") {
             steps {
                 script {
                     docker.withRegistry('',DOCKER_PASS) {
-                        docker_image = docker.build"${IMAGE_NAME}"
+                        docker_image = docker.build("${IMAGE_NAME}")
                     }
                     docker.withRegistry('',DOCKER_PASS) {
-                      docker_image.push("${IMAGE_TAG}")
-                      docker_image.push("latest")
+                        docker_image.push("${IMAGE_TAG}")
+                        docker_image.push("latest")
                     }
                 }
             }
         }
     }
+}
 
