@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'aws-spot i-06c0fbffe6edf20de'
+        label 'aws-spot'
     }
     tools {
         jdk 'java17'
