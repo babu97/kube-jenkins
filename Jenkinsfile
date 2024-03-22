@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        label 'jenkins-aagent'
+        label 'ec2-fleet'
     }
     tools {
         jdk 'java17'
